@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="icon" href="https://img.icons8.com/nolan/64/dragon-ball.png">
+        <!--tipografias-->
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+        <!--Estilo Css-->
+        <link href="style.css" type="text/css" rel="stylesheet">
+        <!--libreria de Iconos-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <title>Dragon Ball</title>
+    <style>
+         @media only screen and (max-width: 480px) {
+            #videoPlayer{
+                width: 100% !important;
+            }
+            .video-container{
+                position: absolute;
+            }
+            .dividir{
+                display: block;
+            }
+            .episodes-list {
+                display: block !important;
+            }
+            .episodes-list {
+                margin: auto;
+                width: 100%;
+                position: relative;
+                padding: 0 !important;
+                top: 300px !important;
+                max-height: 175px !important; 
+                background: transparent;
+            }
+            .episodes-list {
+                margin-left: 0!important;
+            }
+            .presentacion{
+                width: 85%;
+            }
+            .mn{
+                font-size: 18px;
+            }
+            .lmp{
+                display: none;
+            }
+            .imagenes .sagas{
+        position: absolute;
+        top:100%
+
+    }
+
+         }
+        .episodes-list {
+            list-style-type: none;            
+            margin: 0;
+            flex: 1;
+            border-right: none;
+        }
+        .navegacion {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; 
+    width: 100%;
+}
+
+.top-buttons,
+.bottom-button {
+    display: flex;
+    top: 30%;
+    position: relative;
+}
+
+.top-buttons input[type="button"] {
+    margin-right: 30px; /* Espacio entre los botones de arriba */
+    padding: 15px;
+    border: 1px solid #0776c1;
+    text-shadow: 1px 2px 4px #15151e;
+    color: #fff;
+    font-size: 15px;
+    border-radius: 20px;
+}
+
+.bottom-button {
+    margin-right: 18px;
+    margin-top: 20px; 
+    padding: 15px;
+    border: 1px solid #0776c1;
+    text-shadow: 1px 2px 4px #15151e;
+    color: #fff;
+    font-size: 15px;
+    border-radius: 20px;
+}
+        .episode-item {
+            border-radius: 10px;
+            overflow: hidden;
+            display: flex;
+            cursor: pointer;
+            transition: border-color 0.3s ease;
+            padding-block: 2px 10px;
+        }
+        .episode-item:hover {
+            border-color: #aaa;
+        }
+        .episode-item img {
+            width: 60px;
+            height: auto;
+            margin-right: 10px;
+            border-radius: 10px 0 0 10px;
+        }
+        .episode-details {
+            padding: 10px;
+        }
+        .episode-title {
+            margin-top: 0;
+            font-size: 18px;
+            color: #333;
+        }
+        .episode-description {
+            margin-bottom: 0;
+            font-size: 14px;
+            color: #666;
+        }
+        #video-player {
+            width: 700px;
+            height: auto;
+            background-image: url('https://i.ytimg.com/vi/H6jQfYtwD6I/hqdefault.jpg');
+            background-size: cover;
+            background-position: center;
+            border: 2px solid #fff;
+            border-radius: 20px;
+            margin-top: 20px;
+            flex: 1;
+            /*aclarar*/
+            filter: brightness(1.5); 
+        }
+        /* Estilos para los controles del reproductor de video */
+        video::-webkit-media-controls {
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+        }
+        video::-webkit-media-controls-play-button,
+        video::-webkit-media-controls-pause-button {
+            color: #fff;
+        }
+        video::-webkit-media-controls-timeline {
+            background-color: transparent;
+        }
+        video::-webkit-media-controls-current-time-display,
+        video::-webkit-media-controls-time-remaining-display {
+            color: #fff;
+        }
+        .dividir {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .episodes-list {
+        flex: 1.2;
+        margin-left: 50px; /* Ajusta el margen según sea necesario */
+    }
+    .episodes-list {
+        list-style-type: none;
+        max-height: 375px; /* Altura máxima para mostrar 5 elementos */
+        overflow-y: auto; /* Agrega una barra de desplazamiento vertical si es necesario */
+        padding: 10px;
+    }
+
+    .episode-item {
+        margin-bottom: 20px; /* Espacio entre cada elemento */
+    }
+
+    .episode-details {
+        margin-left: 10px; /* Espacio entre la imagen y los detalles del episodio */
+    }
+    #btn-pantalla{
+    display: flex;
+    width: 70%;
+    margin: auto;
+    padding: 10px;
+    background: #0f82e7;
+    justify-content: center; /* Centra horizontalmente el contenido */
+    align-items: center; /* Centra verticalmente el contenido */
+    font-size: 18px;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 15px;
+    cursor: pointer;
+}
+#btn-pantalla:hover{
+    background-color:#0fa9e7d6 ;
+}
+    /*barra scroll**/
+    /* Estilo para el track */
+::-webkit-scrollbar {
+  width: 7px; /* Ancho de la barra de desplazamiento */
+}
+
+/* Estilo para el thumb (el botón deslizante) */
+::-webkit-scrollbar-thumb {
+  background-color: #888; /* Color del thumb */
+  border-radius: 5px; /* Radio de borde del thumb */
+}
+
+/* Estilo cuando se pasa el mouse sobre la barra */
+::-webkit-scrollbar-thumb:hover {
+  background-color: #555; /* Cambia el color cuando se pasa el mouse */
+}
+
+/* Estilo para el track en el eje Y */
+::-webkit-scrollbar-track {
+  background-color: #f1f1f13c; /* Color de fondo del track */
+  border-radius: 5px; /* Radio de borde del track */
+}
+
+/* Estilo para el track en el eje X */
+::-webkit-scrollbar-track-horizontal {
+  background-color: #f1f1f13a; /* Color de fondo del track en eje X */
+}
+
+/* Estilo para el thumb en el eje X */
+::-webkit-scrollbar-thumb:horizontal {
+  background-color: #88888841; /* Color del thumb en el eje X */
+}
+
+    </style>
+</head>
+<body>
+    <div class="contenedor">
+        <nav class="nav_menu">
+            <h2><img src="https://img.icons8.com/external-icongeek26-linear-colour-icongeek26/64/000000/external-wolf-animal-faces-icongeek26-linear-colour-icongeek26.png"
+                    alt="" class="nav_icono">ディラン</h2>
+            <a id="menuToggle"><i class="fa fa-bars" aria-hidden="true"></i></a>
+            <ul>
+                <li>
+                    <i class="fa fa-home" style="color: #ffffff;" aria-hidden="true"></i>
+                    <a href="">Inicio</a>
+                </li>
+                <li>
+                    <i class="fa fa-film" aria-hidden="true"></i>
+                    <a href="">Peliculas</a>
+                </li>
+                <li>
+                    <i class="fa fa-file-video-o" aria-hidden="true"></i>
+                    <a href="">Sagas</a>
+                </li>
+                <li>
+                    <i class="fa fa-firefox" aria-hidden="true"></i>
+                    <a href="">Ovas</a>
+                </li>
+                <li>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <a href="">Otros</a>
+                </li>
+                <li id="buscador">
+                    <input type="text" id="input_buscador" placeholder="Buscar">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                </li>
+            </ul>
+            <ul class="nav_buscador">
+                <li>
+                    <input type="text" id="input_buscador" placeholder="Buscar">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                </li>
+            </ul>
+        </nav>
+
+<div class="presentacion">
+
+    <hr class="separador">
+    <div class="sagas"><img class="titulosaga" src="dragon ball z.png"></div>
+    
+    <br>
+    <div class="dividir">
+        <h2 ><span style="color: red;">SAGA</span> <span style="color: yellow;">SAYAYIN</span></h2>
+    <label class="lmp" style="float: inline-end;">Lista de Episodios 1/36</label></div>
+<div class="dividir">
+    <div class="video-container">
+        <iframe id="videoPlayer" src="https://www.yourdecoration.com/cdn/shop/products/abystyle-abydco441-dragon-ball-saiyajin-arc-poster-91-5x61cm_56d0f6d9-2f9b-42d4-a115-2c4c4523cfbf.jpg?width=620&height=355&fit=scale&gravity=sm&margin-left=15px" width="534" height="360" allow="autoplay" style="object-fit: contain; text-align: center; margin: auto; background: #000000b3;"></iframe>
+
+        <button id="btn-pantalla" onclick="fullscreen()">Pantalla completa</button>
+    </div>
+    <ul class="episodes-list">
+            <li class="episode-item">
+                <img src="portada_sayayin.png" alt="Portada del episodio 1" width="80" height="55">
+                <div class="episode-details"><h3 onclick="playVideo('https://drive.google.com/file/d/1Xf7eqGu1we9Nq4tVDCiNBS64QTELYcjn/preview')">Ep.1 - "El guerrero más fuerte del universo"</h3></div>
+            </li>
+            <li class="episode-item">
+                <img src="portada_sayayin.png" alt="Portada del episodio 2" width="80" height="55">
+                <div class="episode-details"><h3 onclick="playVideo('https://drive.google.com/file/d/11vf__5j0QeeEM8GWVADZ8ku4-5yoL8t3/preview')">Ep.2 - "Piccolo vs. Raditz"</h3></div>
+            </li>
+            <li class="episode-item">
+                <img src="portada_sayayin.png" alt="Portada del episodio 3" width="80" height="55">
+                <div class="episode-details"><h3 onclick="playVideo('https://drive.google.com/file/d/1ZLxdyA1aQKbMPgkkHFh4cTOGTBNycHtv/preview')">Ep.3 - "Goku, el legendario Super Saiyan"</h3></div>
+            </li>
+            <li class="episode-item">
+                <img src="portada_sayayin.png" alt="Portada del episodio 4" width="80" height="55">
+                <div class="episode-details"><h3 onclick="playVideo('https://drive.google.com/file/d/104wLfK0g0oG3-8or9G2n4u17bhAQr2EK/preview')">Ep.4 - "Ataque Saiyan"</h3></div>
+            </li>
+            <li class="episode-item">
+                <img src="portada_sayayin.png" alt="Portada del episodio 5" width="80" height="55">
+                <div class="episode-details"><h3 onclick="playVideo('https://drive.google.com/file/d/1q8AnHTyxgLRMAAMJdNgawcQpdXpGwHdl/preview')">Ep.5 - "El precio de la desobediencia"</h3></div>
+            </li>
+            <li class="episode-item">
+                <img src="portada_sayayin.png" alt="Portada del episodio 6" width="80" height="55">
+                <div class="episode-details"><h3 onclick="playVideo('https://drive.google.com/file/d/11tw_j3W6I9hu_vMNwAscG4Z9AnoKNB-0/preview')">Ep.6 - "Sacrificio"</h3></div>
+            </li>
+            <li class="episode-item">
+                <img src="portada_sayayin.png" alt="Portada del episodio 7" width="80" height="55">
+                <div class="episode-details"><h3 onclick="playVideo('https://drive.google.com/file/d/1GfqyoWnTCM0OOl-4rOgmccGCUBCMsA9x/preview')">Ep.7 - "El fin del camino"</h3></div>
+            </li>
+            <li class="episode-item">
+                <img src="portada_sayayin.png" alt="Portada del episodio 8" width="80" height="55">
+                <div class="episode-details"><h3 onclick="playVideo('https://drive.google.com/file/d/1ZY2GGP6SZPY473gyrn0vypJWbnYMgvFG/preview')">Ep.8 - "El entrenamiento especial de Piccolo"</h3></div>
+            </li>
+            <li class="episode-item">
+                <img src="portada_sayayin.png" alt="Portada del episodio 9" width="80" height="55">
+                <div class="episode-details"><h3 onclick="playVideo('https://drive.google.com/file/d/1NaoN0k5C2zHe-iXugqWyqodHp9PTa4g_/preview')">Ep.9 - "Poder de combate 1 millón"</h3></div>
+            </li>
+            <li class="episode-item">
+                <img src="portada_sayayin.png" alt="Portada del episodio 10" width="80" height="55">
+                <div class="episode-details"><h3 onclick="playVideo('https://drive.google.com/file/d/1ZxuuZ1U5JajfXvb4PBL36H1HyYR9vcOm/preview')">Ep.10 - "Desafío a los Saiyans"</h3></div>
+            </li>
+            <li class="episode-item">
+                <img src="portada_sayayin.png" alt="Portada del episodio 11" width="80" height="55">
+                <div class="episode-details"><h3 onclick="playVideo('https://drive.google.com/file/d/1dhthlSXnpAmhrqmFZyXMvo14CnTSFdyP/preview')">Ep.11 - "La batalla en la tierra"</h3></div>
+            </li>
+            <li class="episode-item">
+                <img src="portada_sayayin.png" alt="Portada del episodio 12" width="80" height="55">
+                <div class="episode-details"><h3 onclick="playVideo('https://drive.google.com/file/d/1f2JnTpX1fG96MaZl3uzCtMcNFXYYkjyt/preview')">Ep.12 - "El secreto de Goku"</h3></div>
+            </li>
+            <li class="episode-item">
+                <img src="portada_sayayin.png" alt="Portada del episodio 13" width="80" height="55">
+                <div class="episode-details"><h3 onclick="playVideo('https://drive.google.com/file/d/1VirAzBs37pnEQ2UK9Jw6C9XeuFm4K1d9/preview')">Ep.13 - "El ataque del Galick Gun"</h3></div>
+            </li>
+            <li class="episode-item">
+                <img src="portada_sayayin.png" alt="Portada del episodio 14" width="80" height="55">
+                <div class="episode-details"><h3 onclick="playVideo('https://drive.google.com/file/d/1ImNMg66txkAJkkao7xN_aMHlThYeVqUN/preview')">Ep.14 - "El planeta Namek"</h3></div>
+            </li>
+            <li class="episode-item">
+                <img src="portada_sayayin.png" alt="Portada del episodio 15" width="80" height="55">
+                <div class="episode-details"><h3 onclick="playVideo('https://drive.google.com/file/d/1WwrCZ25_xydw4fVtiDewJU-ApX7VMNNs/preview')">Ep.15 - "La llegada de los Saiyans"</h3></div>
+            </li>
+            <li class="episode-item">
+                <img src="portada_sayayin.png" alt="Portada del episodio 16" width="80" height="55">
+                <div class="episode-details"><h3 onclick="playVideo('https://drive.google.com/file/d/1AVNIA6fvreu0JDZ6Fh2-Kw1OzOHykbhA/preview')">Ep.16 - "Una batalla a muerte"</h3></div>
+            </li>
+            <li class="episode-item">
+                <img src="portada_sayayin.png" alt="Portada del episodio 17" width="80" height="55">
+                <div class="episode-details"><h3 onclick="playVideo('https://drive.google.com/file/d/10N20QSq3T1X5L2Ke9fYkJo_0tL7rdtZD/preview')">Ep.17 - "El último recurso"</h3></div>
+            </li>
+            <li class="episode-item">
+                <img src="portada_sayayin.png" alt="Portada del episodio 18" width="80" height="55">
+                <div class="episode-details"><h3 onclick="playVideo('https://drive.google.com/file/d/15ce_Ky5RK9N8RV2C5llY4HIyq0YnyNg9/preview')">Ep.18 - "¡Esperanza!"</h3></div>
+            </li>
+            <li class="episode-item">
+                <img src="portada_sayayin.png" alt="Portada del episodio 19" width="80" height="55">
+                <div class="episode-details"><h3 onclick="playVideo('https://drive.google.com/file/d/1oXJzPtkY5AqkFtlRoI36DMgjE48Q6DB3/preview')">Ep.19 - "La batalla final"</h3></div>
+            </li>
+            <li class="episode-item">
+                <img src="portada_sayayin.png" alt="Portada del episodio 20" width="80" height="55">
+                <div class="episode-details"><h3 onclick="playVideo('https://drive.google.com/file/d/1LDll7vdEADjb3ch_Rsvg0GUTvHOsoqJN/preview')">Ep.20 - "El renacimiento de Goku"</h3></div>
+            </li>
+            <li class="episode-item">
+                <img src="portada_sayayin.png" alt="Portada del episodio 21" width="80" height="55">
+                <div class="episode-details"><h3 onclick="playVideo('https://drive.google.com/file/d/1_DtX9M7o_6-1aGtDq7A1boFf47lQrj25/preview')">Ep.21 - "Gohan despierta"</h3></div>
+            </li>
+            <li class="episode-item">
+                <img src="portada_sayayin.png" alt="Portada del episodio 22" width="80" height="55">
+                <div class="episode-details"><h3 onclick="playVideo('https://drive.google.com/file/d/1yFxxbpZBSvtOhXDN9O3Kub119OJ4zypG/preview')">Ep.22 - "La furia de Gohan"</h3></div>
+            </li>
+            <li class="episode-item">
+                <img src="portada_sayayin.png" alt="Portada del episodio 23" width="80" height="55">
+                <div class="episode-details"><h3 onclick="playVideo('https://drive.google.com/file/d/1_0jzhpiBof9fTbC0QmwvsiDTv31SX6Mw/preview')">Ep.23 - "La lucha continua"</h3></div>
+            </li>
+            <li class="episode-item">
+                <img src="portada_sayayin.png" alt="Portada del episodio 24" width="80" height="55">
+                <div class="episode-details"><h3 onclick="playVideo('https://drive.google.com/file/d/11kyLWjLcguUnziJYc4jMpSof2_BkXL38/preview')">Ep.24 - "La táctica de Krillin"</h3></div>
+            </li>
+            <li class="episode-item">
+                <img src="portada_sayayin.png" alt="Portada del episodio 25" width="80" height="55">
+                <div class="episode-details"><h3 onclick="playVideo('https://drive.google.com/file/d/1OPUX27a-uZDT3A1LMMo_XpNsdZSwiEIg/preview')">Ep.25 - "La estrategia de Piccolo"</h3></div>
+            </li>
+            <li class="episode-item">
+                <img src="portada_sayayin.png" alt="Portada del episodio 26" width="80" height="55">
+                <div class="episode-details"><h3 onclick="playVideo('https://drive.google.com/file/d/1D8LzMHgVl9j9ag8M2S8kf_ezogY_ZHBe/preview')">Ep.26 - "El poder de la luna llena"</h3></div>
+            </li>
+            <li class="episode-item">
+                <img src="portada_sayayin.png" alt="Portada del episodio 27" width="80" height="55">
+                <div class="episode-details"><h3 onclick="playVideo('https://drive.google.com/file/d/1lMH8uaKdiP_zatIRUmYEhmZzPQbvwWAW/preview')">Ep.27 - "La transformación de Gohan"</h3></div>
+            </li>
+            <li class="episode-item">
+                <img src="portada_sayayin.png" alt="Portada del episodio 28" width="80" height="55">
+                <div class="episode-details"><h3 onclick="playVideo('https://drive.google.com/file/d/1drbSzLyL5h2RiioJ1IdPMuxIQO_3_bhm/view')">Ep.28 - "El sacrificio de Piccolo"</h3></div>
+            </li>
+            <li class="episode-item">
+                <img src="portada_sayayin.png" alt="Portada del episodio 29" width="80" height="55">
+                <div class="episode-details"><h3 onclick="playVideo('https://drive.google.com/file/d/1DMsccpxS3rIZJB-chD6g2F3uwTPKihKi/preview')">Ep.29 - "La desesperación de Goku"</h3></div>
+            </li>
+            <li class="episode-item">
+                <img src="portada_sayayin.png" alt="Portada del episodio 30" width="80" height="55">
+                <div class="episode-details"><h3 onclick="playVideo('https://drive.google.com/file/d/1Ef8An4lnNX78xrViGfOaXaIr0_7Kb59i/preview')">Ep.30 - "La llegada de los demás"</h3></div>
+            </li>
+            <li class="episode-item">
+                <img src="portada_sayayin.png" alt="Portada del episodio 31" width="80" height="55">
+                <div class="episode-details"><h3 onclick="playVideo('https://drive.google.com/file/d/1S1SVeARogqlH24aqZOd3GsUoM7kWup3e/preview')">Ep.31 - "La preparación para la batalla"</h3></div>
+            </li>
+            <li class="episode-item">
+                <img src="portada_sayayin.png" alt="Portada del episodio 32" width="80" height="55">
+                <div class="episode-details"><h3 onclick="playVideo('https://drive.google.com/file/d/1n9XObihXsF52H5XSeeM_1aJgltfV')">Ep.32 - "La batalla comienza"</h3></div>
+            </li>
+            <li class="episode-item">
+                <img src="portada_sayayin.png" alt="Portada del episodio 33" width="80" height="55">
+                <div class="episode-details"><h3 onclick="playVideo('https://drive.google.com/file/d/1oCVyKx1lzvDmu2d8Bae7EHrzEXQiMOf0/preview')">Ep.33 - "El contraataque de Gohan"</h3></div>
+            </li>
+            <li class="episode-item">
+                <img src="portada_sayayin.png" alt="Portada del episodio 34" width="80" height="55">
+                <div class="episode-details"><h3 onclick="playVideo('https://drive.google.com/file/d/1rmCkFZgss1w-4PF-zZFjnb4rYaQraos4/preview')">Ep.34 - "La furia de Goku"</h3></div>
+            </li>
+            <li class="episode-item">
+                <img src="portada_sayayin.png" alt="Portada del episodio 35" width="80" height="55">
+                <div class="episode-details"><h3 onclick="playVideo('https://drive.google.com/file/d/19_AsF_F9yGmupkzIsTI57Ujk6jPIYBbW/preview')">Ep.35 - "La última esperanza"</h3></div>
+            </li>
+            <li class="episode-item">
+                <img src="portada_sayayin.png" alt="Portada del episodio 36" width="80" height="55">
+                <div class="episode-details"><h3 onclick="playVideo('https://drive.google.com/file/d/1Tml1_vibjzdDyTXAgJ9CjvOjeISqc6cK/preview')">Ep.36 - "El desenlace final"</h3></div>
+            </li>
+            <li class="episode-item">
+                <img src="portada_sayayin.png" alt="Portada del episodio 37" width="80" height="55">
+                <div class="episode-details"><h3 onclick="playVideo('https://drive.google.com/file/d/17fok4QcznOBvMxfZBsiL3pME4v5E2x8C/preview')">Ep.37 - "La despedida de un guerrero"</h3></div>
+            </li>
+            <li class="episode-item">
+                <img src="portada_sayayin.png" alt="Portada del episodio 38" width="80" height="55">
+                <div class="episode-details"><h3 onclick="playVideo('https://drive.google.com/file/d/1drbSzLyL5h2RiioJ1IdPMuxIQO_3_bhm/view')">Ep.38 - "El legado de Raditz"</h3></div>
+            </li>
+        
+    </ul>
+
+</div>
+
+<div class="imagenes">
+    <br>
+    <div class="sagas"><img class="titulosaga" src="dragon ball z.png">
+        <hr style="margin-top: 5px!important;" class="separador">
+        <div class="contenedor-slider">
+            <div class="seccion">
+              <img src="https://img.wattpad.com/a032c5b01af2551ec311ce4e9560083f52756ff0/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f776174747061642d6d656469612d736572766963652f53746f7279496d6167652f37747376685242647638624d73413d3d2d3736343233333630312e313637633834383537383232316636333838323539383133333033342e676966" alt="Imagen 4">
+            </div>
+            <div class="seccion">
+              <img src="https://i.pinimg.com/originals/ed/d4/f5/edd4f5c51260420ec0b1a9f44a35222c.gif" alt="Imagen 5">
+            </div>
+            <div class="seccion">
+              <img src="https://pa1.aminoapps.com/6628/583a5124fcecc06bfb743bee5adc79b3bf62be07_hq.gif" alt="Imagen 6">
+            </div>
+            <div class="seccion">
+              <img src="https://i.redd.it/k82mst3v1la61.gif" alt="Imagen 7">
+            </div>
+          </div>
+          
+    
+    </div>
+    
+</div>
+<div class="navegacion">
+    
+<br><br>
+    <div class="top-buttons">
+        <a href="index.html"><input style="background-color: #0fdce7;" type="button" value="Volver"></a>
+        <input style="background: #07c12f;" type="button" value="Siguiente Saga">
+    </div>
+    <div class="bottom-button">
+        <input style="background: transparent; border: none; color: #fff;
+        font-size: 15px;" type="button" value="Lista de Sagas">
+    </div>
+</div>
+
+</div>
+</div>
+<script>
+     /*mostrar nav*/
+     var menuToggle = document.getElementById("menuToggle");
+        var navMenu = document.querySelector(".nav_menu ul");
+
+        menuToggle.addEventListener("click", function () {
+            // Alternar la clase CSS
+            navMenu.classList.toggle("mostrar");// Agregar o quitar la clase "mostrar" en navMenuBuscador
+        });
+        // Añadir un escuchador de eventos para cerrar el menú al hacer clic fuera de él
+        document.addEventListener("click", function (event) {
+            var isClickInsideMenu = navMenu.contains(event.target);
+            var isClickOnToggleButton = menuToggle.contains(event.target);
+            if (!isClickInsideMenu && !isClickOnToggleButton) {
+                navMenu.classList.remove("mostrar");
+            }
+        });
+    // Obtener la lista de episodios
+    function playVideo(videoUrl) {
+        var videoPlayer = document.getElementById('videoPlayer');
+        videoPlayer.src = videoUrl;
+    }
+
+    function fullscreen() {
+        var videoPlayer = document.getElementById('videoPlayer');
+        if (videoPlayer.requestFullscreen) {
+            videoPlayer.requestFullscreen();
+        } else if (videoPlayer.mozRequestFullScreen) { /* Firefox */
+            videoPlayer.mozRequestFullScreen();
+        } else if (videoPlayer.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
+            videoPlayer.webkitRequestFullscreen();
+        } else if (videoPlayer.msRequestFullscreen) { /* IE/Edge */
+            videoPlayer.msRequestFullscreen();
+        }
+    }
+    /**/
+    var imageLoaded = false; // Variable para rastrear si la imagen estática ya se ha cargado
+
+// Función para cambiar la fuente del iframe
+function changeSource(src) {
+    var videoIframe = document.getElementById('videoPlayer');
+    videoIframe.src = src;
+}
+
+// Manejar eventos de redimensionamiento de la ventana para cambiar la fuente del iframe
+window.addEventListener('resize', function() {
+    var videoIframe = document.getElementById('videoPlayer');
+    var screenWidth = window.innerWidth;
+    if (screenWidth <= 480 && !imageLoaded) {
+        videoIframe.src = 'carga.gif';
+        imageLoaded = true; // Establecer la variable a true una vez que la imagen estática se carga
+    } else if (screenWidth > 480 && !imageLoaded) {
+        videoIframe.src = 'https://www.yourdecoration.com/cdn/shop/products/abystyle-abydco441-dragon-ball-saiyajin-arc-poster-91-5x61cm_56d0f6d9-2f9b-42d4-a115-2c4c4523cfbf.jpg?width=640&amp;height=355&amp;fit=scale&amp;gravity=sm&amp;margin-left=15px';
+        imageLoaded = true; // Establecer la variable a true una vez que la imagen estática se carga
+    }
+});
+
+// Cambiar la fuente del iframe al cargar la página
+window.addEventListener('load', function() {
+    var videoIframe = document.getElementById('videoPlayer');
+    var screenWidth = window.innerWidth;
+    if (screenWidth <= 480 && !imageLoaded) {
+        videoIframe.src = 'carga.gif';
+        imageLoaded = true; // Establecer la variable a true una vez que la imagen estática se carga
+    } else if (screenWidth > 480 && !imageLoaded) {
+        videoIframe.src = 'https://www.yourdecoration.com/cdn/shop/products/abystyle-abydco441-dragon-ball-saiyajin-arc-poster-91-5x61cm_56d0f6d9-2f9b-42d4-a115-2c4c4523cfbf.jpg?width=520&amp;height=370&amp;fit=scale&amp;gravity=sm&amp;margin-left=15px';
+        imageLoaded = true; // Establecer la variable a true una vez que la imagen estática se carga
+    }
+});
+
+</script>
+
+</body>
+</html>
